@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Colors } from "../../constants/colors";
 import OutlinedButton from "../UI/OutlinedButton";
 
-function ImagePicker() {
+function ImagePicker({onImageTaken}) {
     const [pickedImage, setPickedImage] = useState()
     const [cameraPermissionInformation, requestPermission] = useCameraPermissions();
     async function verifyPermissions() {
@@ -29,9 +29,8 @@ function ImagePicker() {
             aspect: [16, 9],
             quality: .5,
         });
-        console.log(image)
-        console.log(image.assets[0].uri)
         setPickedImage(image.assets[0].uri)
+        onImageTaken(image.assets[0].uri)
         
     }
 
